@@ -2,9 +2,6 @@ package IGU;
 
 public class VentPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentPrincipal
-     */
     public VentPrincipal() {
         initComponents();
     }
@@ -23,6 +20,13 @@ public class VentPrincipal extends javax.swing.JFrame {
         menu2 = new java.awt.Menu();
         Fondo = new javax.swing.JPanel();
         Titulo = new java.awt.Label();
+        RegistroPersona = new java.awt.Button();
+        CambEstadCivil = new java.awt.Button();
+        MatrEstudiante = new java.awt.Button();
+        CambFaculProf = new java.awt.Button();
+        ModDepAdministrativo = new java.awt.Button();
+        ModServiciosVar = new java.awt.Button();
+        Regreso = new java.awt.Button();
 
         menu1.setLabel("File");
         menuBar1.add(menu1);
@@ -37,20 +41,97 @@ public class VentPrincipal extends javax.swing.JFrame {
         Titulo.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
         Titulo.setText("Gestión de Personas - Institución Educativa");
 
+        RegistroPersona.setLabel("Registrar Persona");
+        RegistroPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistroPersonaActionPerformed(evt);
+            }
+        });
+
+        CambEstadCivil.setLabel("Cambiar Estado Civil");
+        CambEstadCivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CambEstadCivilActionPerformed(evt);
+            }
+        });
+
+        MatrEstudiante.setLabel("Matricular Estudiante ");
+        // Conectar botón MatrEstudiante con su ventana
+        MatrEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirMatricularEstudiante(evt);
+            }
+        });
+
+        CambFaculProf.setLabel("Cambiar Facultad Profesor");
+        CambFaculProf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CambFaculProfActionPerformed(evt);
+            }
+        });
+
+        ModDepAdministrativo.setLabel("Modificar Dependencia Administrativo ");
+        ModDepAdministrativo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModDepAdministrativoActionPerformed(evt);
+            }
+        });
+
+        ModServiciosVar.setLabel("Modificar Labor Servicios Varios ");
+        ModServiciosVar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModServiciosVarActionPerformed(evt);
+            }
+        });
+
+        Regreso.setLabel("Salir");
+        Regreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegresoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
         Fondo.setLayout(FondoLayout);
         FondoLayout.setHorizontalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RegistroPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CambEstadCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MatrEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CambFaculProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ModDepAdministrativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ModServiciosVar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoLayout.createSequentialGroup()
-                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 230, Short.MAX_VALUE))
+                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RegistroPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CambEstadCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MatrEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CambFaculProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ModDepAdministrativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(ModServiciosVar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        Titulo.getAccessibleContext().setAccessibleName("Gestión de Personas - Institución Educativa");
+        Regreso.getAccessibleContext().setAccessibleName("Regresar al menu anterior");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,11 +141,58 @@ public class VentPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    
+    private void RegistroPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistroPersonaActionPerformed
+        FrmRegistrarPersona frm = new FrmRegistrarPersona(); // crear el formulario
+        frm.setVisible(true);                                // mostrarlo
+        this.dispose();                                      // Cierra el menú principal 
+    }//GEN-LAST:event_RegistroPersonaActionPerformed
+
+    private void CambEstadCivilActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    FrmCambiarEstCivil frm = new FrmCambiarEstCivil();
+    frm.setVisible(true);
+    this.dispose();  // opcional, si quiero cerrar la ventana principal
+    }
+
+    
+    private void RegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresoActionPerformed
+    VentPrincipal menu = new VentPrincipal(); // volver al menú principal
+    menu.setVisible(true);
+    this.dispose();                           // cerrar la ventana actual
+    }//GEN-LAST:event_RegresoActionPerformed
+
+    private void CambFaculProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambFaculProfActionPerformed
+    FrmCambiarFaculProfe frm = new FrmCambiarFaculProfe();
+    frm.setVisible(true);
+    this.dispose(); // si quiero cerrar la ventana principal al abrir la nueva
+    }//GEN-LAST:event_CambFaculProfActionPerformed
+
+    private void ModDepAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModDepAdministrativoActionPerformed
+    FrmModificarDepAdm frm = new FrmModificarDepAdm();
+    frm.setVisible(true);
+    this.dispose(); // si quiero cerrar la ventana principal al abrir la nueva   
+    }//GEN-LAST:event_ModDepAdministrativoActionPerformed
+
+    private void ModServiciosVarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModServiciosVarActionPerformed
+    FrmCambioLaborSV frm = new FrmCambioLaborSV();
+    frm.setVisible(true);
+    this.dispose(); // si quiero cerrar la ventana principal al abrir la nueva
+    }//GEN-LAST:event_ModServiciosVarActionPerformed
+
+    private void abrirMatricularEstudiante(java.awt.event.ActionEvent evt) {
+    FrmMatricularEstudiante frm = new FrmMatricularEstudiante();
+    frm.setVisible(true);
+    this.dispose(); // si quiero cerrar la ventana principal al abrir la nueva
+    }
 
     /**
      * @param args the command line arguments
@@ -102,7 +230,14 @@ public class VentPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button CambEstadCivil;
+    private java.awt.Button CambFaculProf;
     private javax.swing.JPanel Fondo;
+    private java.awt.Button MatrEstudiante;
+    private java.awt.Button ModDepAdministrativo;
+    private java.awt.Button ModServiciosVar;
+    private java.awt.Button RegistroPersona;
+    private java.awt.Button Regreso;
     private java.awt.Label Titulo;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;

@@ -44,7 +44,11 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="Fondo" alignment="1" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Fondo" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -55,18 +59,52 @@
           <Color blue="ff" green="cc" red="cc" type="rgb"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="VentPrincipal_Fondo"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="Titulo" alignment="0" pref="400" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="Titulo" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="RegistroPersona" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="CambEstadCivil" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="MatrEstudiante" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="CambFaculProf" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="ModDepAdministrativo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="ModServiciosVar" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="Regreso" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="Titulo" min="-2" pref="70" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="230" max="32767" attributes="0"/>
+                  <Component id="Titulo" min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="RegistroPersona" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="CambEstadCivil" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="MatrEstudiante" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="CambFaculProf" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="ModDepAdministrativo" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <Component id="ModServiciosVar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="Regreso" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -79,9 +117,65 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Personas - Instituci&#xf3;n Educativa"/>
           </Properties>
+        </Component>
+        <Component class="java.awt.Button" name="RegistroPersona">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="Registrar Persona"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegistroPersonaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="java.awt.Button" name="CambEstadCivil">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="Cambiar Estado Civil"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CambEstadCivil.addActionListener(new java.awt.event.ActionListener() {&#xa;        public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;            CambEstadCivilActionPerformed(evt);&#xa;        }&#xa;    });"/>
+          </AuxValues>
+        </Component>
+        <Component class="java.awt.Button" name="MatrEstudiante">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="Matricular Estudiante "/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Conectar bot&#xf3;n MatrEstudiante con su ventana&#xa;    MatrEstudiante.addActionListener(new java.awt.event.ActionListener() {&#xa;        public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;            abrirMatricularEstudiante(evt);&#xa;        }&#xa;    });"/>
+          </AuxValues>
+        </Component>
+        <Component class="java.awt.Button" name="CambFaculProf">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="Cambiar Facultad Profesor"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CambFaculProfActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="java.awt.Button" name="ModDepAdministrativo">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="Modificar Dependencia Administrativo "/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ModDepAdministrativoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="java.awt.Button" name="ModServiciosVar">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="Modificar Labor Servicios Varios "/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ModServiciosVarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="java.awt.Button" name="Regreso">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="Salir"/>
+          </Properties>
           <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Gesti&#xf3;n de Personas - Instituci&#xf3;n Educativa"/>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Regresar al menu anterior"/>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegresoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
