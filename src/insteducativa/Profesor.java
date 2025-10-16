@@ -26,10 +26,11 @@ public class Profesor extends Empleado{
         System.out.println("Facultad de " + getNombre() + "cambiada a: " + nuevaFacultad);
     }
     
-    // toString sobrescrito para incluir la facultad (polimorfismo)
     @Override
-    public String toString() {
-        return super.toString() + ", facultad='" + facultad + '\'';
-    }
-    
+    public String toCSV() {
+        // PROFESOR;facultad;añoIncorporacion;nombre;apellidos;numeroId;estadoCivil
+        return "PROFESOR;" + esc(getFacultad()) + ";" + getAñoIncorporacion() + ";" +
+               esc(getNombre()) + ";" + esc(getApellidos()) + ";" + getNumeroIdentificacion() + ";" + esc(getEstadoCivil());
+}
+
 }

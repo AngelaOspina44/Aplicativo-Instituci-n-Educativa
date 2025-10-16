@@ -26,9 +26,11 @@ public class ServiciosVarios extends Empleado{
         System.out.println("Labor de " + getNombre() + " modificada a: " + nuevaLabor);
     }
     
-    //toString sobrescrito para incluir la labor (polimorfismo)
     @Override
-    public String toString() {
-        return super.toString() + ", labor='" + labor + '\'';
+    public String toCSV() {
+        // SERVICIOS;labor;añoIncorporacion;nombre;apellidos;numeroId;estadoCivil
+        return "SERVICIOS;" + esc(getLabor()) + ";" + getAñoIncorporacion() + ";" +
+               esc(getNombre()) + ";" + esc(getApellidos()) + ";" + getNumeroIdentificacion() + ";" + esc(getEstadoCivil());
     }
+
 }

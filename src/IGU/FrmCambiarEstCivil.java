@@ -3,12 +3,32 @@ package IGU;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import util.BackgroundPanel;
 
 public class FrmCambiarEstCivil extends javax.swing.JFrame {
     
     public FrmCambiarEstCivil() {
-        initComponents();
-        cargarEstadosCiviles();
+    //Crear el panel de fondo ANTES de initComponents
+    BackgroundPanel fondo = new BackgroundPanel("/imagenes/civ.png");
+    setContentPane(fondo); // el fondo cubre todo el JFrame
+
+    // Inicializar los componentes
+    initComponents();
+
+    // Configurar el layout para que el panel principal quede sobre el fondo
+    getContentPane().setLayout(new java.awt.BorderLayout());
+    fondo.add(EstadoCivil, java.awt.BorderLayout.CENTER); // reemplaza jPanelPrincipal por tu panel real
+    EstadoCivil.setOpaque(false); // para que se vea el fondo a través
+
+    //Cargar datos iniciales
+    cargarEstadosCiviles();
+
+    //Ajustes finales del JFrame
+    pack();
+    setLocationRelativeTo(null);
+      
+   //Cargar los datos del archivo CSV al abrir esta ventana
+   insteducativa.GestorDatos.cargar();
     }
     
     private void regresarAlMenu(java.awt.event.ActionEvent evt) {
@@ -47,61 +67,45 @@ public class FrmCambiarEstCivil extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         EstadoCivil.setBackground(new java.awt.Color(213, 182, 220));
+        EstadoCivil.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        textIdentificacion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        EstadoCivil.add(textIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 87, 104, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Identificación");
+        EstadoCivil.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 87, 127, 36));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nuevo Estado Civil");
+        EstadoCivil.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 144, -1, 30));
 
+        cmbNuevoEstCiv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbNuevoEstCiv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbNuevoEstCiv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbNuevoEstCivActionPerformed(evt);
+            }
+        });
+        EstadoCivil.add(cmbNuevoEstCiv, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 146, 141, -1));
 
+        buttonGuardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         buttonGuardar.setLabel("Guardar");
+        buttonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGuardarActionPerformed(evt);
+            }
+        });
+        EstadoCivil.add(buttonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(93, 241, 80, 35));
 
+        btbRegresar2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btbRegresar2.setLabel("Menú principal");
         btbRegresar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btbRegresar2ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout EstadoCivilLayout = new javax.swing.GroupLayout(EstadoCivil);
-        EstadoCivil.setLayout(EstadoCivilLayout);
-        EstadoCivilLayout.setHorizontalGroup(
-            EstadoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EstadoCivilLayout.createSequentialGroup()
-                .addGroup(EstadoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EstadoCivilLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(EstadoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(48, 48, 48)
-                        .addGroup(EstadoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textIdentificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbNuevoEstCiv, 0, 85, Short.MAX_VALUE)))
-                    .addGroup(EstadoCivilLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(buttonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
-                        .addComponent(btbRegresar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(108, Short.MAX_VALUE))
-        );
-        EstadoCivilLayout.setVerticalGroup(
-            EstadoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EstadoCivilLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(EstadoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textIdentificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(52, 52, 52)
-                .addGroup(EstadoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(cmbNuevoEstCiv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
-                .addGroup(EstadoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btbRegresar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(84, Short.MAX_VALUE))
-        );
+        EstadoCivil.add(btbRegresar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 241, -1, 35));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,6 +124,47 @@ public class FrmCambiarEstCivil extends javax.swing.JFrame {
     private void btbRegresar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbRegresar2ActionPerformed
         regresarAlMenu(evt);
     }//GEN-LAST:event_btbRegresar2ActionPerformed
+
+    private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
+         try {
+        // Obtener datos del formulario
+        long id = Long.parseLong(textIdentificacion.getText().trim());
+        String nuevoEstado = (String) cmbNuevoEstCiv.getSelectedItem();
+
+        // Validar
+        if (nuevoEstado == null || nuevoEstado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecciona un nuevo estado civil.");
+            return;
+        }
+
+        // Intentar cambiar el usuario
+        boolean exito = insteducativa.GestorDatos.cambiarEstadoCivil(id, nuevoEstado);
+
+        // Mostrar resultado 
+        if (exito) {
+            JOptionPane.showMessageDialog(this, 
+                "✅ Estado civil actualizado correctamente.");
+
+            // Refrescar la ventana de datos (para ver el cambio reflejado)
+            Datos ventanaDatos = new Datos(insteducativa.GestorDatos.getLista());
+            ventanaDatos.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "⚠️ No se encontró ninguna persona con esa identificación.");
+        }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, ingresa un número de identificación válido.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Error al cambiar el estado civil: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_buttonGuardarActionPerformed
+
+    private void cmbNuevoEstCivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNuevoEstCivActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbNuevoEstCivActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,15 +1,49 @@
 package IGU;
 
+import javax.swing.JOptionPane;
+import util.BackgroundPanel;
+
 public class FrmCambiarFaculProfe extends javax.swing.JFrame {
     
     public FrmCambiarFaculProfe() {
-        initComponents();
+    // Crear el panel de fondo ANTES de initComponents
+    BackgroundPanel fondo = new BackgroundPanel("/imagenes/fac.png");
+    setContentPane(fondo); // el fondo cubre todo el JFrame
+
+    //Inicializar los componentes
+    initComponents();
+
+    //Configurar el layout para que el panel principal quede sobre el fondo
+    getContentPane().setLayout(new java.awt.BorderLayout());
+    fondo.add(Profesor, java.awt.BorderLayout.CENTER); // reemplaza jPanelPrincipal por tu panel real
+    Profesor.setOpaque(false); // para que se vea el fondo a través
+
+    // Cargar datos iniciales
+    cargarFacultades();
+
+    //Ajustes finales del JFrame
+    pack();
+    setLocationRelativeTo(null);
+        
+    //Cargar los datos del archivo CSV al abrir esta ventana
+    insteducativa.GestorDatos.cargar();
     }
     
     private void regresarAlMenu(java.awt.event.ActionEvent evt) {
     VentPrincipal menu = new VentPrincipal(); // Crear instancia del menú principal
     menu.setVisible(true);                     // Mostrar la ventana principal
     this.dispose();                            // Cerrar la ventana actual
+    }
+    
+    private void cargarFacultades() {
+        textNuevaFac.removeAllItems();
+        textNuevaFac.addItem("Ingeniería");
+        textNuevaFac.addItem("Ciencias Económicas y Administrativas");
+        textNuevaFac.addItem("Ciencias de la Salud");
+        textNuevaFac.addItem("Ciencias Sociales y Humanas");
+        textNuevaFac.addItem("Artes y Diseño");
+        textNuevaFac.addItem("Ciencias Básicas");
+        textNuevaFac.addItem("Ciencias Agrarias");
     }
 
 
@@ -26,65 +60,57 @@ public class FrmCambiarFaculProfe extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         textIdent = new java.awt.TextField();
-        textNuevaFac = new java.awt.TextField();
         btnGuardar4 = new java.awt.Button();
         btnRegresar4 = new java.awt.Button();
+        textNuevaFac = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Profesor.setBackground(new java.awt.Color(192, 182, 186));
+        Profesor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Identificación");
+        Profesor.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 85, 104, 31));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nueva facultad");
+        Profesor.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 143, -1, 34));
 
+        textIdent.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        textIdent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textIdentActionPerformed(evt);
+            }
+        });
+        Profesor.add(textIdent, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 85, 115, -1));
+
+        btnGuardar4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnGuardar4.setLabel("Guardar");
+        btnGuardar4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardar4ActionPerformed(evt);
+            }
+        });
+        Profesor.add(btnGuardar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 254, -1, 38));
 
+        btnRegresar4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnRegresar4.setLabel("Menú principal");
         btnRegresar4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresar4ActionPerformed(evt);
             }
         });
+        Profesor.add(btnRegresar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 254, -1, 38));
 
-        javax.swing.GroupLayout ProfesorLayout = new javax.swing.GroupLayout(Profesor);
-        Profesor.setLayout(ProfesorLayout);
-        ProfesorLayout.setHorizontalGroup(
-            ProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ProfesorLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(ProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(50, 50, 50)
-                .addGroup(ProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textIdent, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                    .addComponent(textNuevaFac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(ProfesorLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addComponent(btnRegresar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107))
-        );
-        ProfesorLayout.setVerticalGroup(
-            ProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ProfesorLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(ProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(textIdent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(ProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textNuevaFac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addGroup(ProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegresar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(76, 76, 76))
-        );
+        textNuevaFac.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textNuevaFac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        textNuevaFac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textNuevaFacActionPerformed(evt);
+            }
+        });
+        Profesor.add(textNuevaFac, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 147, 233, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,6 +129,52 @@ public class FrmCambiarFaculProfe extends javax.swing.JFrame {
     private void btnRegresar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar4ActionPerformed
         regresarAlMenu(evt);
     }//GEN-LAST:event_btnRegresar4ActionPerformed
+
+    private void textNuevaFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNuevaFacActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textNuevaFacActionPerformed
+
+    private void btnGuardar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar4ActionPerformed
+        try {
+        // Obtener datos del formulario
+        long id = Long.parseLong(textIdent.getText().trim());
+        String nuevoEstado = (String) textNuevaFac.getSelectedItem();
+
+        // Validar
+        if (nuevoEstado == null || nuevoEstado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecciona una nueva facultad.");
+            return;
+        }
+
+        // Intentar cambiar el usuario
+        boolean exito = insteducativa.GestorDatos.cambiarFacultadProfesor(id, nuevoEstado);
+
+        // Mostrar resultado 
+        if (exito) {
+            JOptionPane.showMessageDialog(this, 
+                "✅ Facultad actualizada correctamente.");
+
+            // Refrescar la ventana de datos (para ver el cambio reflejado)
+            Datos ventanaDatos = new Datos(insteducativa.GestorDatos.getLista());
+            ventanaDatos.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "⚠️ No se encontró ninguna persona con esa identificación.");
+        }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, ingresa un número de identificación válido.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Error al cambiar la facultad: " + ex.getMessage());
+        }
+         
+    }//GEN-LAST:event_btnGuardar4ActionPerformed
+
+    private void textIdentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textIdentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,6 +218,6 @@ public class FrmCambiarFaculProfe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private java.awt.TextField textIdent;
-    private java.awt.TextField textNuevaFac;
+    private javax.swing.JComboBox<String> textNuevaFac;
     // End of variables declaration//GEN-END:variables
 }

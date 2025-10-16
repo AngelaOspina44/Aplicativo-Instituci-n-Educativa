@@ -1,17 +1,51 @@
 package IGU;
 
+import javax.swing.JOptionPane;
+import util.BackgroundPanel;
+
 public class FrmModificarDepAdm extends javax.swing.JFrame {
 
     public FrmModificarDepAdm() {
-        initComponents();
-    }
+     //Crear el panel de fondo ANTES de initComponents
+    BackgroundPanel fondo = new BackgroundPanel("/imagenes/adm.png");
+    setContentPane(fondo); // el fondo cubre todo el JFrame
+
+    //Inicializar los componentes
+    initComponents();
+
+    //Configurar el layout para que el panel principal quede sobre el fondo
+    getContentPane().setLayout(new java.awt.BorderLayout());
+    fondo.add(jPanel1, java.awt.BorderLayout.CENTER); // reemplaza jPanelPrincipal por tu panel real
+    jPanel1.setOpaque(false); // para que se vea el fondo a través
+
+    //Cargar datos iniciales
+    cargarDependencias();
+
+    //Ajustes finales del JFrame
+    pack();
+    setLocationRelativeTo(null);
+    
+    //Cargar los datos del archivo CSV al abrir esta ventana
+    insteducativa.GestorDatos.cargar();
+}
+
     
     private void regresarAlMenu(java.awt.event.ActionEvent evt) {
     VentPrincipal menu = new VentPrincipal(); // Crear instancia del menú principal
     menu.setVisible(true);                     // Mostrar la ventana principal
     this.dispose();                            // Cerrar la ventana actual
     }
-
+    
+    private void cargarDependencias() {
+        txtNuevaL.removeAllItems();
+        txtNuevaL.addItem("Rectoría");
+        txtNuevaL.addItem("Vicerrectoría Académica");
+        txtNuevaL.addItem("Secretaria General");
+        txtNuevaL.addItem("Recursos Humanos");
+        txtNuevaL.addItem("Dirección Financiera");
+        txtNuevaL.addItem("Admisiones");
+        txtNuevaL.addItem("Sistemas");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,20 +60,36 @@ public class FrmModificarDepAdm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtIdent5 = new java.awt.TextField();
-        txtNuevaLb = new java.awt.TextField();
         btnGuardar5 = new java.awt.Button();
         button2 = new java.awt.Button();
+        txtNuevaL = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(216, 212, 190));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Identificación");
 
-        jLabel2.setText("Nueva Labor");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Nueva Dependencia");
 
+        txtIdent5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtIdent5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdent5ActionPerformed(evt);
+            }
+        });
+
+        btnGuardar5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnGuardar5.setLabel("Guardar");
+        btnGuardar5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardar5ActionPerformed(evt);
+            }
+        });
 
+        button2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         button2.setLabel("Menú principal");
         button2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -47,49 +97,48 @@ public class FrmModificarDepAdm extends javax.swing.JFrame {
             }
         });
 
+        txtNuevaL.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNuevaL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(56, 56, 56)
+                .addComponent(btnGuardar5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91)
+                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGuardar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101)
+                        .addComponent(txtIdent5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
-                        .addGap(55, 55, 55)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtIdent5, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                            .addComponent(txtNuevaLb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(101, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(80, 80, 80)
+                        .addComponent(txtNuevaL, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtIdent5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdent5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(txtNuevaLb, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNuevaL, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(130, 130, 130)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52))
+                    .addComponent(btnGuardar5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
-
-        btnGuardar5.getAccessibleContext().setAccessibleName("Guardar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,6 +157,47 @@ public class FrmModificarDepAdm extends javax.swing.JFrame {
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         regresarAlMenu(evt);
     }//GEN-LAST:event_button2ActionPerformed
+
+    private void btnGuardar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar5ActionPerformed
+        try {
+        // Obtener datos del formulario
+        long id = Long.parseLong(txtIdent5.getText().trim());
+        String nuevoEstado = (String) txtNuevaL.getSelectedItem();
+
+        // Validar
+        if (nuevoEstado == null || nuevoEstado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecciona una nueva dependencia.");
+            return;
+        }
+
+        // Intentar cambiar el usuario
+        boolean exito = insteducativa.GestorDatos.cambiarDependenciaAdministrativo(id, nuevoEstado);
+
+        // Mostrar resultado 
+        if (exito) {
+            JOptionPane.showMessageDialog(this, 
+                "✅ Dependencia actualizada correctamente.");
+
+            // Refrescar la ventana de datos (para ver el cambio reflejado)
+            Datos ventanaDatos = new Datos(insteducativa.GestorDatos.getLista());
+            ventanaDatos.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "⚠️ No se encontró ninguna persona con esa identificación.");
+        }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, ingresa un número de identificación válido.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Error al cambiar la dependencia: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnGuardar5ActionPerformed
+
+    private void txtIdent5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdent5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdent5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,6 +241,6 @@ public class FrmModificarDepAdm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private java.awt.TextField txtIdent5;
-    private java.awt.TextField txtNuevaLb;
+    private javax.swing.JComboBox<String> txtNuevaL;
     // End of variables declaration//GEN-END:variables
 }

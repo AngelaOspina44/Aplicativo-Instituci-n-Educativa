@@ -1,10 +1,33 @@
 package IGU;
 
+import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
+import util.BackgroundPanel;
+
 public class VentPrincipal extends javax.swing.JFrame {
 
     public VentPrincipal() {
+        // Primero, crear el panel de fondo ANTES de los componentes
+        BackgroundPanel fondo = new BackgroundPanel("/imagenes/fondo.png.png");
+        setContentPane(fondo); // <-- El fondo cubre todo el JFrame
+        
         initComponents();
+        
+        // Quitar el color morado del panel para que se vea la imagen
+        Fondo.setOpaque(false);
+
+         // Configurar el layout del fondo para que los botones ocupen todo el espacio
+        fondo.setLayout(new java.awt.BorderLayout());
+        fondo.add(Fondo, java.awt.BorderLayout.CENTER);
+
+        // Establecer el panel con la imagen como contenido principal
+        setContentPane(fondo);
+
+        pack();
+        setLocationRelativeTo(null);
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -14,6 +37,7 @@ public class VentPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         menuBar1 = new java.awt.MenuBar();
         menu1 = new java.awt.Menu();
@@ -38,9 +62,12 @@ public class VentPrincipal extends javax.swing.JFrame {
 
         Fondo.setBackground(new java.awt.Color(204, 204, 255));
 
-        Titulo.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
-        Titulo.setText("Gestión de Personas - Institución Educativa");
+        Titulo.setBackground(new java.awt.Color(204, 204, 204));
+        Titulo.setFont(new java.awt.Font("Constantia", 1, 36)); // NOI18N
+        Titulo.setText("   Registro Personal Institución Educativa ODLR");
 
+        RegistroPersona.setBackground(new java.awt.Color(204, 204, 204));
+        RegistroPersona.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         RegistroPersona.setLabel("Registrar Persona");
         RegistroPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -48,14 +75,20 @@ public class VentPrincipal extends javax.swing.JFrame {
             }
         });
 
-        CambEstadCivil.setLabel("Cambiar Estado Civil");
+        CambEstadCivil.setBackground(new java.awt.Color(204, 204, 204));
+        CambEstadCivil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        CambEstadCivil.setLabel("Modificar Estado Civil");
+        CambEstadCivil.setMinimumSize(new java.awt.Dimension(142, 27));
+        CambEstadCivil.setPreferredSize(new java.awt.Dimension(142, 27));
         CambEstadCivil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CambEstadCivilActionPerformed(evt);
             }
         });
 
-        MatrEstudiante.setLabel("Matricular Estudiante ");
+        MatrEstudiante.setBackground(new java.awt.Color(204, 204, 204));
+        MatrEstudiante.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        MatrEstudiante.setLabel("Modificar Curso Estudiante ");
         // Conectar botón MatrEstudiante con su ventana
         MatrEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,13 +96,17 @@ public class VentPrincipal extends javax.swing.JFrame {
             }
         });
 
-        CambFaculProf.setLabel("Cambiar Facultad Profesor");
+        CambFaculProf.setBackground(new java.awt.Color(204, 204, 204));
+        CambFaculProf.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        CambFaculProf.setLabel("Modificar Facultad Profesor");
         CambFaculProf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CambFaculProfActionPerformed(evt);
             }
         });
 
+        ModDepAdministrativo.setBackground(new java.awt.Color(204, 204, 204));
+        ModDepAdministrativo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         ModDepAdministrativo.setLabel("Modificar Dependencia Administrativo ");
         ModDepAdministrativo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +114,8 @@ public class VentPrincipal extends javax.swing.JFrame {
             }
         });
 
+        ModServiciosVar.setBackground(new java.awt.Color(204, 204, 204));
+        ModServiciosVar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         ModServiciosVar.setLabel("Modificar Labor Servicios Varios ");
         ModServiciosVar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +123,8 @@ public class VentPrincipal extends javax.swing.JFrame {
             }
         });
 
+        Regreso.setBackground(new java.awt.Color(204, 204, 204));
+        Regreso.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Regreso.setLabel("Salir");
         Regreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,42 +136,51 @@ public class VentPrincipal extends javax.swing.JFrame {
         Fondo.setLayout(FondoLayout);
         FondoLayout.setHorizontalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RegistroPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CambEstadCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MatrEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CambFaculProf, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ModServiciosVar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(FondoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(FondoLayout.createSequentialGroup()
-                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RegistroPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CambEstadCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MatrEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CambFaculProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ModDepAdministrativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ModServiciosVar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(ModDepAdministrativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
         );
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoLayout.createSequentialGroup()
-                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RegistroPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CambEstadCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MatrEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(CambFaculProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ModDepAdministrativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(ModServiciosVar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(RegistroPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(CambEstadCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(MatrEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(CambFaculProf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(ModServiciosVar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(ModDepAdministrativo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(49, Short.MAX_VALUE))))
         );
 
+        CambEstadCivil.getAccessibleContext().setAccessibleName("Modificar Estado Civil");
+        MatrEstudiante.getAccessibleContext().setAccessibleDescription("");
         Regreso.getAccessibleContext().setAccessibleName("Regresar al menu anterior");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,7 +191,7 @@ public class VentPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -151,22 +201,14 @@ public class VentPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     
-    private void RegistroPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistroPersonaActionPerformed
-        FrmRegistrarPersona frm = new FrmRegistrarPersona(); // crear el formulario
-        frm.setVisible(true);                                // mostrarlo
-        this.dispose();                                      // Cierra el menú principal 
-    }//GEN-LAST:event_RegistroPersonaActionPerformed
-
     private void CambEstadCivilActionPerformed(java.awt.event.ActionEvent evt) {                                             
     FrmCambiarEstCivil frm = new FrmCambiarEstCivil();
     frm.setVisible(true);
     this.dispose();  // opcional, si quiero cerrar la ventana principal
     }
-
-    
+   
     private void RegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresoActionPerformed
     VentPrincipal menu = new VentPrincipal(); // volver al menú principal
-    menu.setVisible(true);
     this.dispose();                           // cerrar la ventana actual
     }//GEN-LAST:event_RegresoActionPerformed
 
@@ -187,6 +229,12 @@ public class VentPrincipal extends javax.swing.JFrame {
     frm.setVisible(true);
     this.dispose(); // si quiero cerrar la ventana principal al abrir la nueva
     }//GEN-LAST:event_ModServiciosVarActionPerformed
+
+    private void RegistroPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistroPersonaActionPerformed
+        FrmRegistrarPersona frm = new FrmRegistrarPersona(); // crear el formulario
+        frm.setVisible(true);                                // mostrarlo
+        this.dispose();                                      // Cierra el menú principal
+    }//GEN-LAST:event_RegistroPersonaActionPerformed
 
     private void abrirMatricularEstudiante(java.awt.event.ActionEvent evt) {
     FrmMatricularEstudiante frm = new FrmMatricularEstudiante();
@@ -220,11 +268,14 @@ public class VentPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VentPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+         // 🔹 Cargar datos desde el archivo CSV antes de abrir la ventana principal
+        insteducativa.GestorDatos.cargar();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentPrincipal().setVisible(true);
+            new VentPrincipal().setVisible(true);
+            insteducativa.GestorDatos.cargar();
             }
         });
     }

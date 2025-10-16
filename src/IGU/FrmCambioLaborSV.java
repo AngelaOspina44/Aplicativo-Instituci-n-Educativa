@@ -1,15 +1,46 @@
 package IGU;
 
-public class FrmCambioLaborSV extends javax.swing.JFrame {
+import javax.swing.JOptionPane;
+import util.BackgroundPanel;
+
+    public class FrmCambioLaborSV extends javax.swing.JFrame {
 
     public FrmCambioLaborSV() {
-        initComponents();
-    }
+    //Crear el panel de fondo ANTES de initComponents
+    BackgroundPanel fondo = new BackgroundPanel("/imagenes/serv.png");
+    setContentPane(fondo); // el fondo cubre todo el JFrame
+
+    //Inicializar los componentes
+    initComponents();
+
+    //Configurar el layout para que el panel principal quede sobre el fondo
+    getContentPane().setLayout(new java.awt.BorderLayout());
+    fondo.add(ServiciosVarios, java.awt.BorderLayout.CENTER); // reemplaza jPanelPrincipal por el panel real
+    ServiciosVarios.setOpaque(false); // para que se vea el fondo a través
+
+    //Cargar datos iniciales
+    cargarLabores();
+
+    //Ajustes finales del JFrame
+    pack();
+    setLocationRelativeTo(null);
+    
+    //Cargar los datos del archivo CSV al abrir esta ventana
+    insteducativa.GestorDatos.cargar();
+}
     
     private void regresarAlMenu(java.awt.event.ActionEvent evt) {
     VentPrincipal menu = new VentPrincipal(); // Crear instancia del menú principal
     menu.setVisible(true);                     // Mostrar la ventana principal
     this.dispose();                            // Cerrar la ventana actual
+    }
+    
+    private void cargarLabores() {
+        txtNuevaLab.removeAllItems();
+        txtNuevaLab.addItem("Aseo y limpieza general");
+        txtNuevaLab.addItem("Mantenimiento básico");
+        txtNuevaLab.addItem("Jardineria y zonas verdes");
+        txtNuevaLab.addItem("Apoyo logistico y operativo");
     }
 
 
@@ -26,65 +57,47 @@ public class FrmCambioLaborSV extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtIdent6 = new java.awt.TextField();
-        txtNuevaLab = new java.awt.TextField();
         txtGuardar6 = new java.awt.Button();
         btnRegresar6 = new java.awt.Button();
+        txtNuevaLab = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         ServiciosVarios.setBackground(new java.awt.Color(152, 198, 179));
+        ServiciosVarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Identificación");
+        ServiciosVarios.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 77, 96, 31));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nueva labor");
+        ServiciosVarios.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 136, 96, 35));
 
+        txtIdent6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        ServiciosVarios.add(txtIdent6, new org.netbeans.lib.awtextra.AbsoluteConstraints(334, 77, 124, -1));
+
+        txtGuardar6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtGuardar6.setLabel("Guardar");
+        txtGuardar6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGuardar6ActionPerformed(evt);
+            }
+        });
+        ServiciosVarios.add(txtGuardar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 304, -1, 34));
 
+        btnRegresar6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnRegresar6.setLabel("Menú principal");
         btnRegresar6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresar6ActionPerformed(evt);
             }
         });
+        ServiciosVarios.add(btnRegresar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 304, -1, 34));
 
-        javax.swing.GroupLayout ServiciosVariosLayout = new javax.swing.GroupLayout(ServiciosVarios);
-        ServiciosVarios.setLayout(ServiciosVariosLayout);
-        ServiciosVariosLayout.setHorizontalGroup(
-            ServiciosVariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ServiciosVariosLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(ServiciosVariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
-                .addGap(86, 86, 86)
-                .addGroup(ServiciosVariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtIdent6, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addComponent(txtNuevaLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(ServiciosVariosLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(txtGuardar6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                .addComponent(btnRegresar6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
-        );
-        ServiciosVariosLayout.setVerticalGroup(
-            ServiciosVariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ServiciosVariosLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(ServiciosVariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(txtIdent6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(ServiciosVariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNuevaLab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                .addGroup(ServiciosVariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtGuardar6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegresar6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71))
-        );
+        txtNuevaLab.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNuevaLab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ServiciosVarios.add(txtNuevaLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(334, 140, 200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,6 +116,43 @@ public class FrmCambioLaborSV extends javax.swing.JFrame {
     private void btnRegresar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar6ActionPerformed
         regresarAlMenu(evt);
     }//GEN-LAST:event_btnRegresar6ActionPerformed
+
+    private void txtGuardar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGuardar6ActionPerformed
+        try {
+        // Obtener datos del formulario
+        long id = Long.parseLong(txtIdent6.getText().trim());
+        String nuevoEstado = (String) txtNuevaLab.getSelectedItem();
+
+        // Validar
+        if (nuevoEstado == null || nuevoEstado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecciona una nueva labor.");
+            return;
+        }
+
+        // Intentar cambiar el usuario
+        boolean exito = insteducativa.GestorDatos.cambiarLaborServicios(id, nuevoEstado);
+
+        // Mostrar resultado 
+        if (exito) {
+            JOptionPane.showMessageDialog(this, 
+                "✅ Labor actualizada correctamente.");
+
+            // Refrescar la ventana de datos (para ver el cambio reflejado)
+            Datos ventanaDatos = new Datos(insteducativa.GestorDatos.getLista());
+            ventanaDatos.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "⚠️ No se encontró ninguna persona con esa identificación.");
+        }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, ingresa un número de identificación válido.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Error al cambiar la labor: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_txtGuardar6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,6 +196,6 @@ public class FrmCambioLaborSV extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private java.awt.Button txtGuardar6;
     private java.awt.TextField txtIdent6;
-    private java.awt.TextField txtNuevaLab;
+    private javax.swing.JComboBox<String> txtNuevaLab;
     // End of variables declaration//GEN-END:variables
 }

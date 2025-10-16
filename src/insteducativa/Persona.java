@@ -53,15 +53,26 @@ public class Persona {
         setEstadoCivil(nuevoEstadoCivil);
         System.out.println("Estado civil de " + nombre + " cambiado a: " + nuevoEstadoCivil);
     }
+
+    // MÉTODO AUXILIAR: evita errores con ; en textos
+    protected String esc(String s) {
+        return (s == null) ? "" : s.replace(";", ",");
+    }
+
+    // NUEVO: Método base toCSV() que todas las subclases pueden sobrescribir
+    public String toCSV() {
+        // PERSONA;nombre;apellidos;numeroId;estadoCivil
+        return "PERSONA;" + esc(nombre) + ";" + esc(apellidos) + ";" + numeroIdentificacion + ";" + esc(estadoCivil);
+    }
+
     // toString para imprimir fácilmente 
     @Override
     public String toString() {
-        return "Persona{" +
-                "nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", numeroIdentificacion=" + numeroIdentificacion +
-                ", estadoCivil='" + estadoCivil + '\'' +
+        return "Persona " +
+                "nombre = '" + nombre + '\'' +
+                ", apellidos = '" + apellidos + '\'' +
+                ", numeroIdentificacion = " + numeroIdentificacion +
+                ", estadoCivil = '" + estadoCivil + '\'' +
                 '}';
     }
-    
 }

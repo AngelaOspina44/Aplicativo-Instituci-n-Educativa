@@ -28,7 +28,10 @@ public class Estudiante extends Persona {
     
     // toString sobrescrito para incluir el curso (polimorfismo)
     @Override
-    public String toString() {
-        return super.toString() + ", curso='" + curso + '\'';
+    public String toCSV() {
+        // ESTUDIANTE;curso;nombre;apellidos;numeroId;estadoCivil
+        return "ESTUDIANTE;" + esc(getCurso()) + ";" + esc(getNombre()) + ";" + esc(getApellidos()) + ";" +
+               getNumeroIdentificacion() + ";" + esc(getEstadoCivil());
     }
+
 }

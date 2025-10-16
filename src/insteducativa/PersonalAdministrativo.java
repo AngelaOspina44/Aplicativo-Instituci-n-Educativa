@@ -26,9 +26,12 @@ public class PersonalAdministrativo extends Empleado {
         System.out.println("Dependencia de " + getNombre() + " modificada a: " + nuevaDependencia);
     }
     
-    // toString sobrescrito para incluir la dependencia (polimorfismo)
     @Override
-    public String toString() {
-        return super.toString() + ", dependencia='" + dependencia + '\'';
-    }        
+    public String toCSV() {
+        // ADMINISTRATIVO;dependencia;añoIncorporacion;nombre;apellidos;numeroId;estadoCivil
+        return "ADMINISTRATIVO;" + esc(getDependencia()) + ";" + getAñoIncorporacion() + ";" +
+               esc(getNombre()) + ";" + esc(getApellidos()) + ";" + getNumeroIdentificacion() + ";" + esc(getEstadoCivil());
+    }
+
+    
 }

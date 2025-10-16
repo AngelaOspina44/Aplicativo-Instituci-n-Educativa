@@ -1,15 +1,49 @@
 package IGU;
 
+import javax.swing.JOptionPane;
+import util.BackgroundPanel;
+
 public class FrmMatricularEstudiante extends javax.swing.JFrame {
 
     public FrmMatricularEstudiante() {
-        initComponents();
-    }
+        // 1️⃣ Crear el panel de fondo ANTES de initComponents
+    BackgroundPanel fondo = new BackgroundPanel("/imagenes/est.png");
+    setContentPane(fondo); // el fondo cubre todo el JFrame
+
+    // 2️⃣ Inicializar los componentes
+    initComponents();
+
+    // 3️⃣ Configurar el layout para que el panel principal quede sobre el fondo
+    getContentPane().setLayout(new java.awt.BorderLayout());
+    fondo.add(Estudiante, java.awt.BorderLayout.CENTER); // reemplaza jPanelPrincipal por tu panel real
+    Estudiante.setOpaque(false); // para que se vea el fondo a través
+
+    // 4️⃣ Cargar datos iniciales
+    cargarCursos();
+
+    // 5️⃣ Ajustes finales del JFrame
+    pack();
+    setLocationRelativeTo(null);
+    
+    //Cargar los datos del archivo CSV al abrir esta ventana
+    insteducativa.GestorDatos.cargar();
+ }
     
     private void regresarAlMenu(java.awt.event.ActionEvent evt) {
     VentPrincipal menu = new VentPrincipal(); // Crear instancia del menú principal
     menu.setVisible(true);                     // Mostrar la ventana principal
     this.dispose();                            // Cerrar la ventana actual
+    }
+
+    private void cargarCursos() {
+        txtCurso.removeAllItems();
+        txtCurso.addItem("Ingeniería de Software");
+        txtCurso.addItem("Ingeniería Civil");
+        txtCurso.addItem("Derecho");
+        txtCurso.addItem("Administración de Empresas");
+        txtCurso.addItem("Enfermería");
+        txtCurso.addItem("Psicología");
+        txtCurso.addItem("Arquitectura");
     }
     
     /**
@@ -23,68 +57,49 @@ public class FrmMatricularEstudiante extends javax.swing.JFrame {
 
         Estudiante = new javax.swing.JPanel();
         txtIdentEst = new java.awt.TextField();
-        txtCurso = new java.awt.TextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         GuardarEst = new java.awt.Button();
         btbRegresar3 = new java.awt.Button();
+        txtCurso = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Estudiante.setBackground(new java.awt.Color(255, 255, 204));
+        Estudiante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtIdentEst.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        Estudiante.add(txtIdentEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(188, 40, 214, 34));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Identificación");
+        Estudiante.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 40, 111, 36));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nuevo Curso");
+        Estudiante.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 130, 103, 32));
 
+        GuardarEst.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         GuardarEst.setLabel("Guardar");
+        GuardarEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarEstActionPerformed(evt);
+            }
+        });
+        Estudiante.add(GuardarEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 293, -1, -1));
 
+        btbRegresar3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btbRegresar3.setLabel("Menú principal");
         btbRegresar3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btbRegresar3ActionPerformed(evt);
             }
         });
+        Estudiante.add(btbRegresar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 293, -1, -1));
 
-        javax.swing.GroupLayout EstudianteLayout = new javax.swing.GroupLayout(Estudiante);
-        Estudiante.setLayout(EstudianteLayout);
-        EstudianteLayout.setHorizontalGroup(
-            EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EstudianteLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EstudianteLayout.createSequentialGroup()
-                        .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtIdentEst, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                            .addComponent(txtCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(73, 73, 73))
-                    .addGroup(EstudianteLayout.createSequentialGroup()
-                        .addComponent(GuardarEst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                        .addComponent(btbRegresar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85))))
-        );
-        EstudianteLayout.setVerticalGroup(
-            EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EstudianteLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtIdentEst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(32, 32, 32)
-                .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(78, 78, 78)
-                .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(GuardarEst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btbRegresar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
-        );
+        txtCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Estudiante.add(txtCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(188, 129, 252, 35));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,6 +118,43 @@ public class FrmMatricularEstudiante extends javax.swing.JFrame {
     private void btbRegresar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbRegresar3ActionPerformed
         regresarAlMenu(evt);
     }//GEN-LAST:event_btbRegresar3ActionPerformed
+
+    private void GuardarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarEstActionPerformed
+        try {
+        // Obtener datos del formulario
+        long id = Long.parseLong(txtIdentEst.getText().trim());
+        String nuevoEstado = (String) txtCurso.getSelectedItem();
+
+        // Validar
+        if (nuevoEstado == null || nuevoEstado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecciona un nuevo curso.");
+            return;
+        }
+
+        // Intentar cambiar el usuario
+        boolean exito = insteducativa.GestorDatos.cambiarCursoEstudiante(id, nuevoEstado);
+
+        // Mostrar resultado 
+        if (exito) {
+            JOptionPane.showMessageDialog(this, 
+                "✅ Curso actualizado correctamente.");
+
+            // Refrescar la ventana de datos (para ver el cambio reflejado)
+            Datos ventanaDatos = new Datos(insteducativa.GestorDatos.getLista());
+            ventanaDatos.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "⚠️ No se encontró ninguna persona con esa identificación.");
+        }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, ingresa un número de identificación válido.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Error al cambiar el curso: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_GuardarEstActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,7 +197,7 @@ public class FrmMatricularEstudiante extends javax.swing.JFrame {
     private java.awt.Button btbRegresar3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private java.awt.TextField txtCurso;
+    private javax.swing.JComboBox<String> txtCurso;
     private java.awt.TextField txtIdentEst;
     // End of variables declaration//GEN-END:variables
 }

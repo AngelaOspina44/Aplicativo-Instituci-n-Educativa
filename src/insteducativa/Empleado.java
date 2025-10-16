@@ -11,6 +11,7 @@ public abstract class Empleado extends Persona{
     public int getAñoIncorporacion() {
         return añoIncorporacion;
     }
+    
 
     // Setter con validación
     public void setAñoIncorporacion(int añoIncorporacion) {
@@ -21,9 +22,10 @@ public abstract class Empleado extends Persona{
         }
     }
     
+    
      @Override
     public String toString() {
-        return super.toString() + ", añoIncorporacion=" + añoIncorporacion;
+        return super.toString() + ", añoIncorporacion = " + añoIncorporacion;
     }
     
 }

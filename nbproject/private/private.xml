@@ -4,14 +4,19 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/InstEducativa/src/insteducativa/Persona.java</file>
+            <file>file:/C:/InstEducativa/src/IGU/FrmCambioLaborSV.java</file>
             <file>file:/C:/InstEducativa/src/insteducativa/InstEducativa.java</file>
             <file>file:/C:/InstEducativa/src/insteducativa/PersonalAdministrativo.java</file>
-            <file>file:/C:/InstEducativa/src/IGU/Interfaz.java</file>
+            <file>file:/C:/InstEducativa/src/IGU/FrmCambiarEstCivil.java</file>
+            <file>file:/C:/InstEducativa/src/IGU/FrmMatricularEstudiante.java</file>
             <file>file:/C:/InstEducativa/src/insteducativa/Empleado.java</file>
+            <file>file:/C:/InstEducativa/src/IGU/FrmRegistrarPersona.java</file>
             <file>file:/C:/InstEducativa/src/insteducativa/Estudiante.java</file>
-            <file>file:/C:/InstEducativa/src/insteducativa/ServiciosVarios.java</file>
+            <file>file:/C:/InstEducativa/src/util/BackgroundPanel.java</file>
+            <file>file:/C:/InstEducativa/src/IGU/FrmCambiarFaculProfe.java</file>
             <file>file:/C:/InstEducativa/src/IGU/VentPrincipal.java</file>
-            <file>file:/C:/InstEducativa/src/insteducativa/Profesor.java</file>
+            <file>file:/C:/InstEducativa/src/IGU/FrmModificarDepAdm.java</file>
+            <file>file:/C:/InstEducativa/src/insteducativa/GestorDatos.java</file>
         </group>
     </open-files>
 </project-private>

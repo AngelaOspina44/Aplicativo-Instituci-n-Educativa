@@ -1,18 +1,45 @@
 package IGU;
+import insteducativa.Estudiante;
+import insteducativa.GestorDatos;
 import insteducativa.Persona;
+import insteducativa.PersonalAdministrativo;
+import insteducativa.Profesor;
+import insteducativa.ServiciosVarios;
 import java.util.ArrayList;
+import insteducativa.GestorDatos;
+import javax.swing.JOptionPane;
+import util.BackgroundPanel;
 
 public class FrmRegistrarPersona extends javax.swing.JFrame {
 
-    ArrayList<Persona> listaPersonas = new ArrayList<>();
-    
     public FrmRegistrarPersona() {
-        initComponents();
-        cargarCombos();
-        lblExtra.setVisible(false);
-        txtExtra.setVisible(false);
-    }
-    
+    // Crear el panel de fondo antes de inicializar componentes
+    BackgroundPanel fondo = new BackgroundPanel("/imagenes/images.png");
+    setContentPane(fondo); // el fondo cubre todo el JFrame
+
+    // Inicializar los componentes 
+    initComponents();
+
+    // Configurar transparencia o diseño si es necesario
+    getContentPane().setLayout(new java.awt.BorderLayout());
+    fondo.add(Persona, java.awt.BorderLayout.CENTER); // reemplaza jPanelPrincipal por tu panel principal
+    Persona.setOpaque(false); // para ver la imagen de fondo a través
+
+    // Cargar datos iniciales
+    cargarCombos();
+    GestorDatos.cargar();
+
+    // Configurar visibilidad inicial de campos
+    lblExtra.setVisible(false);
+    txtExtra.setVisible(false);
+    lblAñoIncorporacion.setVisible(false);
+    txtAñoIncorporacion.setVisible(false);
+
+    // Ajustes finales del JFrame
+    pack();
+    setLocationRelativeTo(null);
+}
+  
     private void regresarAlMenu(java.awt.event.ActionEvent evt) {
     VentPrincipal menu = new VentPrincipal(); // Crear instancia del menú principal
     menu.setVisible(true);                     // Mostrar la ventana principal
@@ -52,7 +79,6 @@ public class FrmRegistrarPersona extends javax.swing.JFrame {
         txtNombre = new java.awt.TextField();
         txtApellidos = new java.awt.TextField();
         txtIdentificacion = new java.awt.TextField();
-        txtExtra = new java.awt.TextField();
         btnGuardar = new java.awt.Button();
         cmbEstadoCivil = new javax.swing.JComboBox<>();
         cmbTipoPersona = new javax.swing.JComboBox<>();
@@ -63,6 +89,9 @@ public class FrmRegistrarPersona extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btbRegresar = new java.awt.Button();
+        lblAñoIncorporacion = new javax.swing.JLabel();
+        txtAñoIncorporacion = new java.awt.TextField();
+        txtExtra = new javax.swing.JComboBox<>();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -74,12 +103,14 @@ public class FrmRegistrarPersona extends javax.swing.JFrame {
 
         Persona.setBackground(new java.awt.Color(182, 225, 225));
 
-        txtExtra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtExtraActionPerformed(evt);
-            }
-        });
+        txtNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
+        txtApellidos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        txtIdentificacion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        btnGuardar.setBackground(new java.awt.Color(204, 204, 204));
+        btnGuardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnGuardar.setLabel("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,9 +118,11 @@ public class FrmRegistrarPersona extends javax.swing.JFrame {
             }
         });
 
+        cmbEstadoCivil.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbEstadoCivil.setToolTipText("");
 
+        cmbTipoPersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbTipoPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbTipoPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,18 +130,27 @@ public class FrmRegistrarPersona extends javax.swing.JFrame {
             }
         });
 
+        lblExtra.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblExtra.setText("Extra:");
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Nombre");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Apellidos");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Identificación");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Estado Civil");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Tipo de Persona");
 
+        btbRegresar.setBackground(new java.awt.Color(204, 204, 204));
+        btbRegresar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btbRegresar.setLabel("Menú principal");
         btbRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,74 +158,97 @@ public class FrmRegistrarPersona extends javax.swing.JFrame {
             }
         });
 
+        lblAñoIncorporacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAñoIncorporacion.setText("Año de Incorporación");
+        lblAñoIncorporacion.setVisible(false);
+        txtAñoIncorporacion.setVisible(false);
+
+        txtAñoIncorporacion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtAñoIncorporacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAñoIncorporacionActionPerformed(evt);
+            }
+        });
+
+        txtExtra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtExtra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout PersonaLayout = new javax.swing.GroupLayout(Persona);
         Persona.setLayout(PersonaLayout);
         PersonaLayout.setHorizontalGroup(
             PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PersonaLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PersonaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addGap(37, 37, 37)
                         .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(213, 213, 213)
+                        .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtIdentificacion, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                                 .addComponent(txtApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtIdentificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cmbEstadoCivil, 0, 100, Short.MAX_VALUE))
-                            .addComponent(txtExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(95, 95, 95))
+                                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cmbEstadoCivil, 0, 248, Short.MAX_VALUE)
+                            .addComponent(cmbTipoPersona, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(PersonaLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(btbRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(37, 37, 37)
+                        .addComponent(lblAñoIncorporacion)
+                        .addGap(186, 186, 186)
+                        .addComponent(txtAñoIncorporacion, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PersonaLayout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(157, 157, 157)
+                        .addComponent(btbRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonaLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(lblExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(213, 213, 213)
+                        .addComponent(txtExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         PersonaLayout.setVerticalGroup(
             PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PersonaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22)
-                .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonaLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
-                .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtIdentificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PersonaLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
+                .addGap(82, 82, 82)
+                .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(PersonaLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PersonaLayout.createSequentialGroup()
+                        .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtExtra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                    .addComponent(lblAñoIncorporacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAñoIncorporacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addGroup(PersonaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btbRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(47, 47, 47))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btbRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,52 +259,182 @@ public class FrmRegistrarPersona extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Persona, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Persona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtExtraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExtraActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtExtraActionPerformed
-
     private void cmbTipoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoPersonaActionPerformed
         String tipo = (String) cmbTipoPersona.getSelectedItem();
 
-    if (tipo == null || tipo.isEmpty()) {
+        if (tipo == null || tipo.isEmpty()) {
         lblExtra.setVisible(false);
         txtExtra.setVisible(false);
+        lblAñoIncorporacion.setVisible(false);
+        txtAñoIncorporacion.setVisible(false);
         return;
+        
     }
+       
+        lblExtra.setVisible(true);
+        txtExtra.setVisible(true);
+        txtExtra.removeAllItems(); // Limpiar antes de llenar
 
-    lblExtra.setVisible(true);
-    txtExtra.setVisible(true);
-
-    switch (tipo) {
-        case "Estudiante":
-            lblExtra.setText("Curso:");
-            break;
-        case "Profesor":
-            lblExtra.setText("Facultad:");
-            break;
-        case "Administrativo":
-            lblExtra.setText("Dependencia:");
-            break;
-        case "Servicios Varios":
-            lblExtra.setText("Labor:");
-            break;
-    }
+        switch (tipo) {
+            case "Estudiante":
+                lblExtra.setText("Curso:");
+                lblAñoIncorporacion.setVisible(false);
+                txtAñoIncorporacion.setVisible(false);
+                txtExtra.addItem("Ingeniería de Software");
+                txtExtra.addItem("Ingeniería Civil");
+                txtExtra.addItem("Derecho");
+                txtExtra.addItem("Administración de Empresas");
+                txtExtra.addItem("Enfermería");
+                txtExtra.addItem("Psicología");
+                txtExtra.addItem("Arquitectura");
+                break;
+            case "Profesor":
+                lblExtra.setText("Facultad:");
+                lblAñoIncorporacion.setVisible(true);
+                txtAñoIncorporacion.setVisible(true);
+                txtExtra.addItem("Ingeniería");
+                txtExtra.addItem("Ciencias Económicas y Administrativas");
+                txtExtra.addItem("Ciencias de la Salud");
+                txtExtra.addItem("Ciencias Sociales y Humanas");
+                txtExtra.addItem("Artes y Diseño");
+                txtExtra.addItem("Ciencias Básicas");
+                txtExtra.addItem("Ciencias Agrarias");
+                break;
+            case "Administrativo":
+                lblExtra.setText("Dependencia:");
+                lblAñoIncorporacion.setVisible(true);
+                txtAñoIncorporacion.setVisible(true);
+                txtExtra.addItem("Rectoría");
+                txtExtra.addItem("Vicerrectoría Académica");
+                txtExtra.addItem("Secretaria General");
+                txtExtra.addItem("Recursos Humanos");
+                txtExtra.addItem("Dirección Financiera");
+                txtExtra.addItem("Admisiones");
+                txtExtra.addItem("Sistemas");
+                break;
+            case "Servicios Varios":
+                lblExtra.setText("Labor:");
+                lblAñoIncorporacion.setVisible(true);
+                txtAñoIncorporacion.setVisible(true);
+                txtExtra.addItem("Aseo y limpieza general");
+                txtExtra.addItem("Mantenimiento básico");
+                txtExtra.addItem("Jardineria y zonas verdes");
+                txtExtra.addItem("Apoyo logistico y operativo");
+                break;
+        }
+       
     }//GEN-LAST:event_cmbTipoPersonaActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-   
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    String nombre = txtNombre.getText().trim();
+    String apellidos = txtApellidos.getText().trim();
+    String idTexto = txtIdentificacion.getText().trim();
+    String estadoCivil = (String) cmbEstadoCivil.getSelectedItem();
+    String tipo = (String) cmbTipoPersona.getSelectedItem();
+    String extra = (String) txtExtra.getSelectedItem();
+    String añoTexto = txtAñoIncorporacion.getText().trim();
 
+    // VALIDACIONES 
+    if (nombre.isEmpty() || apellidos.isEmpty() || idTexto.isEmpty() || estadoCivil == null || tipo == null) {
+        JOptionPane.showMessageDialog(this, "Por favor completa todos los campos obligatorios.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Validar que nombre y apellidos no contengan números ni símbolos
+    if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+        JOptionPane.showMessageDialog(this, "El nombre solo puede contener letras.", "Error en nombre", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    if (!apellidos.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+        JOptionPane.showMessageDialog(this, "Los apellidos solo pueden contener letras.", "Error en apellidos", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Validar que la identificación sea numérica
+    long id;
+    try {
+        id = Long.parseLong(idTexto);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "La identificación debe ser un número válido.", "Error en identificación", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    // Validar que la identificacion no este repetida
+    for (Persona personaExistente : GestorDatos.getLista()) {
+        if (personaExistente.getNumeroIdentificacion() == id) {
+            JOptionPane.showMessageDialog(this,
+                "Ya existe una persona registrada con esta identificación",
+                "Identificación duplicada",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+    }
+
+    // Validar que si se requiere año, sea número
+    int añoIncorporacion = 0;
+    if (lblAñoIncorporacion.isVisible()) {
+        if (añoTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar el año de incorporación.", "Campo faltante", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            añoIncorporacion = Integer.parseInt(añoTexto);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El año de incorporación debe ser numérico.", "Error en año", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+
+    // Validar que haya seleccionado una opción extra cuando sea visible
+    if (lblExtra.isVisible() && (extra == null || extra.isEmpty())) {
+        JOptionPane.showMessageDialog(this, "Debes seleccionar un valor en el campo '" + lblExtra.getText() + "'.", "Campo faltante", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // CREACIÓN DEL OBJETO PERSONA
+    Persona p = null;
+    switch (tipo) {
+        case "Estudiante":
+            p = new Estudiante(extra, nombre, apellidos, id, estadoCivil);
+            break;
+        case "Profesor":
+            p = new Profesor(extra, añoIncorporacion, nombre, apellidos, id, estadoCivil);
+            break;
+        case "Administrativo":
+            p = new PersonalAdministrativo(extra, añoIncorporacion, nombre, apellidos, id, estadoCivil);
+            break;
+        case "Servicios Varios":
+            p = new ServiciosVarios(extra, añoIncorporacion, nombre, apellidos, id, estadoCivil);
+            break;
+    }
+
+    // UARDAR
+    if (p != null) {
+        GestorDatos.agregarPersona(p); 
+        JOptionPane.showMessageDialog(this, "Persona guardada correctamente.");
+        System.out.println(p + " guardado correctamente.");
+
+        Datos ventanaDatos = new Datos(GestorDatos.getLista());
+        ventanaDatos.setVisible(true);
+        limpiarCampos();
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
+}
+    
     private void btbRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbRegresarActionPerformed
     regresarAlMenu(evt);
     }//GEN-LAST:event_btbRegresarActionPerformed
+
+    private void txtAñoIncorporacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAñoIncorporacionActionPerformed
+            // TODO add your handling code here:
+    }//GEN-LAST:event_txtAñoIncorporacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,7 +471,23 @@ public class FrmRegistrarPersona extends javax.swing.JFrame {
         });
     }
     
-    
+
+    // MÉTODO PARA LIMPIAR CAMPOS
+
+    private void limpiarCampos() {
+    txtNombre.setText("");
+    txtApellidos.setText("");
+    txtIdentificacion.setText("");
+    txtExtra.setSelectedIndex(-1);
+    txtAñoIncorporacion.setText("");
+    cmbEstadoCivil.setSelectedIndex(0);
+    cmbTipoPersona.setSelectedIndex(0);
+    lblExtra.setVisible(false);
+    txtExtra.setVisible(false);
+    lblAñoIncorporacion.setVisible(false);
+    txtAñoIncorporacion.setVisible(false);
+}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Persona;
@@ -291,9 +502,11 @@ public class FrmRegistrarPersona extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblAñoIncorporacion;
     private javax.swing.JLabel lblExtra;
     private java.awt.TextField txtApellidos;
-    private java.awt.TextField txtExtra;
+    private java.awt.TextField txtAñoIncorporacion;
+    private javax.swing.JComboBox<String> txtExtra;
     private java.awt.TextField txtIdentificacion;
     private java.awt.TextField txtNombre;
     // End of variables declaration//GEN-END:variables
